@@ -92,8 +92,8 @@ var upperCasedCharacters = [
 var passwordLength = "";
 var confirmSpecialCharacters;
 var confirmNumericCharacters;
-var confirmUpperCasedCharacters;
 var confirmLowerCasedCharacters;
+var confirmUpperCasedCharacters;
 
 // Function to generate password with user input
 function generatePassword() {
@@ -111,18 +111,18 @@ function generatePassword() {
   alert(`Your random generated password will have ${passwordLength} characters.`);
 
   // Asking the user to confirm which characters they'd like to use for their password
-  confirmNumericCharacters = confirm("Would you like your password to contain numbers?");
   confirmSpecialCharacters = confirm("Would you like your password to contain special characters?");
-  confirmUpperCasedCharacters = confirm("Would you like your password to contain uppercase characters?");
+  confirmNumericCharacters = confirm("Would you like your password to contain numbers?");
   confirmLowerCasedCharacters = confirm("Would you like your password to contain lowercase characters?");
+  confirmUpperCasedCharacters = confirm("Would you like your password to contain uppercase characters?");
 
   // If none of the characters are confirmed by the user then it will alert them to their error and ask them to confirm at least one in order to generate password - if it happens again it will then loop
   while (confirmUpperCasedCharacters === false && confirmLowerCasedCharacters === false && confirmSpecialCharacters === false && confirmNumericCharacters === false) {
     alert("You must choose at least one of the criteria to generate a password.");
-    confirmNumericCharacters = confirm("Would you like your password to contain numbers?");
     confirmSpecialCharacters = confirm("Would you like your password to contain special characters?");
-    confirmUpperCasedCharacters = confirm("Would you like your password to contain uppercase characters?");
+    confirmNumericCharacters = confirm("Would you like your password to contain numbers?");
     confirmLowerCasedCharacters = confirm("Would you like your password to contain lowercase characters?");
+    confirmUpperCasedCharacters = confirm("Would you like your password to contain uppercase characters?");
   }
 
   // Creating a new array 
