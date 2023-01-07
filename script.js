@@ -89,11 +89,12 @@ var upperCasedCharacters = [
 ];
 
 // Variable declaration 
+var passwordLength = "";
 var confirmSpecialCharacters;
 var confirmNumericCharacters;
 var confirmUpperCasedCharacters;
 var confirmLowerCasedCharacters;
-var confirmLength = "";
+var passwordCharacters = [];
 
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -102,23 +103,30 @@ function getPasswordOptions() {
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+      
+  // Empty string to be filled based on for loop selecting random characters from the array
+      var randomPassword = ""
+      
+      for (var i = 0; i < confirmLength; i++) {
+        randomPassword = randomPassword + passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)];
+        console.log(randomPassword)
+      }
 }
 
 // Function to generate password with user input
 function generatePassword() {
 
   // Prompt asking for user input to choose how many characters for the password
-  enter = parseInt(prompt("How many characters would you like for your password? You may choose between 10 and 64."));
+  passwordLength = parseInt(prompt("How many characters would you like for your password? You may choose between 10 and 64."));
 
   // Ensuring the character length chosen is between 10 and 64 - if not an alert will be displayed and the prompt will be asked again
-  while (confirmLength <= 9 || confirmLength >= 65) {
+  while (passwordLength <= 9 || passwordLength >= 65) {
     alert("Password length must be between 10 and 64 characters. Please try again");
-    var confirmLength = (prompt("How many characters would you like for your password? You may choose between 10 and 64."));
+    var passwordLength = (prompt("How many characters would you like for your password? You may choose between 10 and 64."));
   }
 
   // Validating to the user how many characters they've chosen for their password  
-  alert(`Your password will have ${confirmLength} characters`);
+  alert(`Your password will have ${passwordLength} characters`);
 
   // Asking the user to confirm which characters they'd like to use for their password
   confirmNumericCharacters = confirm("Would you like your password to contain numbers?");
@@ -134,6 +142,9 @@ function generatePassword() {
     confirmUpperCasedCharacters = confirm("Would you like your password to contain uppercase characters?");
     confirmLowerCasedCharacters = confirm("Would you like your password to contain lowercase characters?");
   }
+
+  return randomPassword;
+
 };
 
 // Get references to the #generate element
