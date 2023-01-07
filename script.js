@@ -94,24 +94,6 @@ var confirmSpecialCharacters;
 var confirmNumericCharacters;
 var confirmUpperCasedCharacters;
 var confirmLowerCasedCharacters;
-var passwordCharacters = [];
-
-// Function to prompt user for password options
-function getPasswordOptions() {
-
-}
-
-// Function for getting a random element from an array
-function getRandom(arr) {
-      
-  // Empty string to be filled based on for loop selecting random characters from the array
-      var randomPassword = ""
-      
-      for (var i = 0; i < confirmLength; i++) {
-        randomPassword = randomPassword + passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)];
-        console.log(randomPassword)
-      }
-}
 
 // Function to generate password with user input
 function generatePassword() {
@@ -121,12 +103,12 @@ function generatePassword() {
 
   // Ensuring the character length chosen is between 10 and 64 - if not an alert will be displayed and the prompt will be asked again
   while (passwordLength <= 9 || passwordLength >= 65) {
-    alert("Password length must be between 10 and 64 characters. Please try again");
+    alert("Password length must be between 10 and 64 characters. Please try again.");
     var passwordLength = (prompt("How many characters would you like for your password? You may choose between 10 and 64."));
   }
 
   // Validating to the user how many characters they've chosen for their password  
-  alert(`Your password will have ${passwordLength} characters`);
+  alert(`Your random generated password will have ${passwordLength} characters.`);
 
   // Asking the user to confirm which characters they'd like to use for their password
   confirmNumericCharacters = confirm("Would you like your password to contain numbers?");
@@ -136,15 +118,45 @@ function generatePassword() {
 
   // If none of the characters are confirmed by the user then it will alert them to their error and ask them to confirm at least one in order to generate password - if it happens again it will then loop
   while (confirmUpperCasedCharacters === false && confirmLowerCasedCharacters === false && confirmSpecialCharacters === false && confirmNumericCharacters === false) {
-    alert("You must choose at least one of the criterea to generate a password.");
+    alert("You must choose at least one of the criteria to generate a password.");
     confirmNumericCharacters = confirm("Would you like your password to contain numbers?");
     confirmSpecialCharacters = confirm("Would you like your password to contain special characters?");
     confirmUpperCasedCharacters = confirm("Would you like your password to contain uppercase characters?");
     confirmLowerCasedCharacters = confirm("Would you like your password to contain lowercase characters?");
   }
 
-  return randomPassword;
+  // Creating a new array 
+  var characterCombination = [];
 
+  // Concatenating the special characters array onto the new array if the user selects it
+  if (confirmSpecialCharacters) {
+    characterCombination = characterCombination.concat(specialCharacters)
+  }
+  //  Concatenating the numeric characters array onto the new array if the user selects it
+  if (confirmNumericCharacters) {
+    characterCombination = characterCombination.concat(numericCharacters)
+  }
+
+  // Concatenating the lower cased characters array onto the new array if the user selects it
+  if (confirmLowerCasedCharacters) {
+    characterCombination = characterCombination.concat(lowerCasedCharacters)
+  }
+
+  // Concatenating the upper cased characters array onto the new array if the user selects it
+  if (confirmUpperCasedCharacters) {
+    characterCombination = characterCombination.concat(upperCasedCharacters)
+  }
+
+  // Creating an empty string for the password that will be generated based on the for loop below
+  var generatedPassword = "";
+
+  // For loop selecting random characters from the new array which is concatenated with whichever characters the user selected
+  for (var i = 0; i < passwordLength; i++) {
+    generatedPassword = generatedPassword + characterCombination[Math.floor(Math.random() * characterCombination.length)];
+  }
+
+  // Telling it that the string which now contains the characters selected by the user should be returned in replacement of the 'Your Secure Password' placeholder
+  return generatedPassword;
 };
 
 // Get references to the #generate element
